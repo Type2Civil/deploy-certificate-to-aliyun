@@ -5,7 +5,8 @@ from aliyunsdkcdn.request.v20180510 import SetCdnDomainSSLCertificateRequest
 
 def get_env_var(key):
     a = os.getenv(key)
-    value = a
+    b = a
+    value = b
     if not value:
         raise EnvironmentError(f"Environment variable {key} not set")
     return value
