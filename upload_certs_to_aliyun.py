@@ -4,7 +4,8 @@ from aliyunsdkcore.client import AcsClient
 from aliyunsdkcdn.request.v20180510 import SetCdnDomainSSLCertificateRequest
 
 def get_env_var(key):
-    value = os.getenv(key)
+    a = os.getenv(key)
+    value = a
     if not value:
         raise EnvironmentError(f"Environment variable {key} not set")
     return value
@@ -16,7 +17,7 @@ def file_exists_and_not_empty(file_path):
 def upload_certificate(client, domain_name, cert_path, key_path):
     expanded_cert_path = os.path.expanduser(cert_path)
     expanded_key_path = os.path.expanduser(key_path)
-
+    
     if not file_exists_and_not_empty(expanded_cert_path) or not file_exists_and_not_empty(expanded_key_path):
         raise FileNotFoundError(f"Certificate or key file for domain {domain_name} is missing or empty")
     
@@ -29,7 +30,7 @@ def upload_certificate(client, domain_name, cert_path, key_path):
     request = SetCdnDomainSSLCertificateRequest.SetCdnDomainSSLCertificateRequest()
     # CDN加速域名
     request.set_DomainName(domain_name)
-    # 证书名称
+    # 证书名称 不是cdn 可以么？
     request.set_CertName(domain_name + datetime.datetime.now().strftime("%Y%m%d"))
     request.set_CertType('upload')
     request.set_SSLProtocol('on')
